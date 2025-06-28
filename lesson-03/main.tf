@@ -26,7 +26,7 @@ resource "aws_subnet" "main" {
   tags = {
     Name = "tf-subnet"
   }
-  depends_on = [ aws_vpc.tf-vpc ]
+  provider = aws.provider2
 }
 resource "aws_vpc" "tf-vpc" {
   provider = aws.provider2
