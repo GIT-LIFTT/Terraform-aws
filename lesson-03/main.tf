@@ -18,6 +18,15 @@ provider "aws" {
   region = "us-east-1"
 }
 
+
+resource "aws_subnet" "main" {
+  vpc_id     = aws_vpc.tf-vpc.id
+  cidr_block = "10.1.1.0/24"
+
+  tags = {
+    Name = "tf-subnet"
+  }
+}
 resource "aws_vpc" "tf-vpc" {
   provider = aws.provider2
   cidr_block = "10.1.0.0/16"
