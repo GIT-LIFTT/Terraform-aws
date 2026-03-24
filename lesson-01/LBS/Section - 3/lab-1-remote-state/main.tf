@@ -21,11 +21,15 @@ provider "aws" {
   region = "eu-west-2"
 }
 
+#creates a s3 bucket which is to be used for terraform state 
 resource "aws_s3_bucket" "tf_state" {
     bucket = "jj-tf-state-remote-001"
 }
 
 
+#creates a dynamodb whcih is to be used to handle tf state locking 
+#ensuring that only one person is accessing the state file at a time 
+# this porevents it dfrom becoming corrupt 
 resource "aws_dynamodb_table" "tf_lock" {
     name = "tf-state-lock"
     billing_mode = "PAY_PER_REQUEST"
@@ -36,3 +40,7 @@ resource "aws_dynamodb_table" "tf_lock" {
         type = "S"
     }
 }
+
+
+
+
