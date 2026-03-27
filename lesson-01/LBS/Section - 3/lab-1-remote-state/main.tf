@@ -1,13 +1,20 @@
 #The terraform block configures Terraform’s runtime rules.
 #It does not create infrastructure
 terraform {
-  required_version = ">= 1.6.0"
+  required_version = ">= 1.5.0"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+  }
+    backend "s3" {
+    bucket         = "jj-tf-state-remote-001"
+    key            = "envs/dev/terraform.tfstate"
+    region         = "eu-west-2"
+    dynamodb_table = "tf-state-lock"
+    encrypt        = true
   }
 }
 
@@ -18,7 +25,7 @@ terraform {
 # and any global settings needed before resources can be created
 
 provider "aws" {
-  region = "eu-west-2"
+  region = "us‑east‑1"
 }
 
 #creates a s3 bucket which is to be used for terraform state 
