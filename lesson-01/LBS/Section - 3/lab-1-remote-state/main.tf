@@ -12,7 +12,7 @@ terraform {
     backend "s3" {
     bucket         = "jj-tf-state-remote-001"
     key            = "envs/dev/terraform.tfstate"
-    region         = "eu-west-2"
+    region         = "us-east-1"
     dynamodb_table = "tf-state-lock"
     encrypt        = true
   }
